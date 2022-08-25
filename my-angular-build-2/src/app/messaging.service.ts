@@ -31,6 +31,7 @@ export class MessagingService {
   ];
 
   userMessagesChanged = new EventEmitter<Message[]>();
+  senderMessagesChanged = new EventEmitter<Message[]>();
 
   getSenderMessages() {
     return this.senderMessages.slice();
