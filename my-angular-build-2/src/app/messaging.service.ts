@@ -3,8 +3,9 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { LoggingService } from './logging.service';
 import { Message } from './message';
 
-@Injectable()
+@Injectable({ providedIn: 'root'})
 export class MessagingService {
+
   private senderMessages: Message[] = [
     {
       sender: { firstName: "Ludovic", isOnline: true },

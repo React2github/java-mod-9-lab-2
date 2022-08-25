@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessagingService } from '../messaging.service';
 
 @Component({
   selector: 'app-conversation-thread',
@@ -7,33 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConversationThreadComponent implements OnInit {
 
-  senderMessages = [
-    {
-      sender: { firstName: "Ludovic" },
-      text: "Message from Ludovic",
-      conversationId: 1,
-      sequenceNumber: 0,
-    },
-    {
-      sender: { firstName: "Jessica" },
-      text: "Message from Jessica",
-      conversationId: 1,
-      sequenceNumber: 1,
-    },
-  ];
+  senderMessages = []
 
-  userMessages = [
-    {
-      sender: { firstName: "Aurelie" },
-      text: "Message from Aurelie",
-      conversationId: 1,
-      sequenceNumber: 2,
-    },
-  ];
+  userMessages = [];
 
-  constructor() { }
+  constructor(private messagingSvce: MessagingService) { }
+
 
   ngOnInit(): void {
+  this.userMessages = this.messagingSvce.getUserMessages();
+  this.senderMessages = this.messagingSvce.getSenderMessages();
+  this.messagingSvce.userMessagesChanged.subscribe(userMessages => this.userMessages = userMessages);
   }
 
 }
